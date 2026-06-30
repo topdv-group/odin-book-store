@@ -6,7 +6,7 @@ const submitBookButton = document.querySelector("#addDialog button")
 const deleteBookButton = document.querySelector("#removeDialog button")
 const removeBookBtn = document.querySelector(".removeBook-btn")
 const cancel = document.querySelector(".submit-button #cancel")
-
+const allInputs = document.querySelectorAll("#addDialog .upper-dialog-cont input")
 
 const NOT_FOUND = 'NOT_FOUND'
 const SUCCESS = 'SUCCESS'
@@ -63,7 +63,8 @@ removeBookBtn.addEventListener("click", () => {
 
       xButton.addEventListener("click", () => {
         library.splice(index, 1); 
-        renderList();          
+        renderList();
+        loadDefaultBooks();
       });
 
       bookRow.appendChild(xButton);
@@ -86,6 +87,14 @@ submitBookButton.addEventListener("click", ()=>{
     const userInputName = document.querySelector("#book-name")
     const userInputpages = document.querySelector("#book-pages")
     const checkbox = document.getElementById("book-read")
+
+    if(userInputauthor.value =='' ||userInputName.value ==='' ||
+      userInputpages.value === ''
+    ){
+
+      prompt("some fields missing")
+      return
+    }
     
     const response = addBook(userInputauthor.value, userInputName.value,Number(userInputpages.value),checkbox.checked)
     updateGui(response);
@@ -101,14 +110,14 @@ function getUniqueId(){
 }
 
 function loadDefaultBooks(){
-    // FIXED: Clear the main column containers instead of non-existent individual divs
     document.querySelector(".bookName-list").innerHTML = '';
     document.querySelector(".reads-list").innerHTML = '';
     document.querySelector(".pages-list").innerHTML = '';
     document.querySelector(".authors-list").innerHTML = '';
 
     library.forEach(element => {
-        updateGui(element)
+      updateGui(element)
+
     });
 }
 

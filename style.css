@@ -122,6 +122,13 @@ dialog {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   width: 90%;
   max-width: 500px;
+  
+}
+.upper-dialog-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 5%;
 }
 
 .userAddedBookName{
